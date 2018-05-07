@@ -10,8 +10,8 @@ public class NewMessagePage {
     @FindBy(id = "send-button")
     WebElement sendButton;
 
-    public MessagesPage fillMessageForm() {
-        messageForm.sendKeys("Can I ask you a question?");
+    public MessagesPage fillMessageForm(String someMessage) {
+        messageForm.sendKeys(someMessage);
         sendButton.click();
         return PageFactory.initElements(BrowserManager.browser, MessagesPage.class);
     }

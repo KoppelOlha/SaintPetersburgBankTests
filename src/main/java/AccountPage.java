@@ -25,23 +25,23 @@ public class AccountPage extends BrowserManager {
     @FindBy(className = "icon-email")
     WebElement email;
 
-    public String isNameAsExpected() {
+    public String getUserNameText() {
         return userName.getText();
     }
 
     public StatementPage openStatementPage() {
-        WebElement hover = accountsMenu;
         Actions action = new Actions(browser);
-        action.moveToElement(hover).build().perform();
-        new WebDriverWait(browser, 3).until(ExpectedConditions.visibilityOf(statement)).click();
+        action.moveToElement(accountsMenu).build().perform();
+        Utils.waitForElementVisible(statement);
+        statement.click();
         return PageFactory.initElements(BrowserManager.browser, StatementPage.class);
     }
 
     public ExchangePage openExchangePage() {
-        WebElement hover = currencyMenu;
         Actions action = new Actions(browser);
-        action.moveToElement(hover).build().perform();
-        new WebDriverWait(browser, 5).until(ExpectedConditions.visibilityOf(currencyExchange)).click();
+        action.moveToElement(currencyMenu).build().perform();
+        Utils.waitForElementVisible(currencyExchange);
+        currencyExchange.click();
         return PageFactory.initElements(BrowserManager.browser, ExchangePage.class);
     }
 

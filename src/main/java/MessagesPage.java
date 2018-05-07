@@ -15,7 +15,7 @@ public class MessagesPage {
         return PageFactory.initElements(BrowserManager.browser, NewMessagePage.class);
     }
 
-    public String isSentMessagePresent() {
+    public String getSentMessageText() {
         return listOfMessages.getText();
     }
 }

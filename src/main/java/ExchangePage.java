@@ -27,16 +27,14 @@ public class ExchangePage extends BrowserManager {
     @FindBy(id = "forward")
     WebElement calculateButton;
 
-    public ExchangePreviewPage exchangeOrdering() {
+    public ExchangePreviewPage exchangeOrdering(String textSum, String someText) {
         sellFromAccount.click();
         new WebDriverWait(browser, 3).until(ExpectedConditions.visibilityOf(sellCurrencyAccount)).click();
-        inputSum.sendKeys("150");
+        inputSum.sendKeys(textSum);
         buyToAccount.click();
         new WebDriverWait(browser, 3).until(ExpectedConditions.visibilityOf(buyCurrencyAccount)).click();
-        inputDetails.sendKeys("Exchange");
+        inputDetails.sendKeys(someText);
         calculateButton.click();
         return PageFactory.initElements(BrowserManager.browser, ExchangePreviewPage.class);
     }
 }
-
-

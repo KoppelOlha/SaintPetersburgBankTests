@@ -7,7 +7,7 @@ public class ExchangeResult {
     @FindBy(xpath = ".//*[@class='alert alert-success']")
     WebElement isNotificationPresent;
 
-    public String isSuccessTextPresent() {
+    public String getSuccessText() {
         return isNotificationPresent.getText();
     }
 

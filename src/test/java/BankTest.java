@@ -13,8 +13,8 @@ public class BankTest {
 
     @Test
     public void enterAccount() {
-        String accountPage = Navigation.openLoginPage().loginPasswordEnter().confirmSmsCode().isNameAsExpected();
-        Assert.assertTrue(accountPage.contains("Королёва Ольга"), "The name of the account's owner should be present");
+        String userNameText = Navigation.openLoginPage().loginPasswordEnter().confirmSmsCode().getUserNameText();
+        Assert.assertTrue(userNameText.contains("Королёва Ольга"), "The name of the account's owner should be present");
     }
 
     @Test
@@ -30,26 +30,26 @@ public class BankTest {
 
     @Test
     public void exchangeTransaction() {
-        String exchangeResult = Navigation.openLoginPage()
+        String succesText = Navigation.openLoginPage()
                 .loginPasswordEnter()
                 .confirmSmsCode()
                 .openExchangePage()
-                .exchangeOrdering()
+                .exchangeOrdering("150", "Exchange")
                 .confirmExchange()
-                .isSuccessTextPresent();
-        Assert.assertTrue(exchangeResult.contains("Перевод выполнен!"), "The exchange should be successful");
+                .getSuccessText();
+        Assert.assertTrue(succesText.contains("Перевод выполнен!"), "The exchange should be successful");
     }
 
     @Test
     public void checkSentMessagePresence() {
-        String sentMessages = Navigation.openLoginPage()
+        String sentMessageText = Navigation.openLoginPage()
                 .loginPasswordEnter()
                 .confirmSmsCode()
                 .openEmailsPage()
                 .openNewMessagePage()
-                .fillMessageForm()
-                .isSentMessagePresent();
-        Assert.assertTrue(sentMessages.contains("Can I ask you a question?"), "The sent message should be in the list of messages");
+                .fillMessageForm("Can I ask you a question?")
+                .getSentMessageText();
+        Assert.assertTrue(sentMessageText.contains("Can I ask you a question?"), "The sent message should be in the list of messages");
 
     }
 
