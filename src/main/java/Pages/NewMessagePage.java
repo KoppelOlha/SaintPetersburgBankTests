@@ -1,3 +1,7 @@
+package Pages;
+
+import Framework.BrowserManager;
+import Framework.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,7 +16,7 @@ public class NewMessagePage {
 
     public MessagesPage fillMessageForm(String someMessage) {
         messageForm.sendKeys(someMessage);
-        sendButton.click();
+        Utils.clickWithJS(sendButton);
         return PageFactory.initElements(BrowserManager.browser, MessagesPage.class);
     }
 }

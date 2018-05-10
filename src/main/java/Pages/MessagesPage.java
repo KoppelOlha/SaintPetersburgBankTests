@@ -1,3 +1,7 @@
+package Pages;
+
+import Framework.BrowserManager;
+import Framework.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,7 +15,7 @@ public class MessagesPage {
     WebElement listOfMessages;
 
     public NewMessagePage openNewMessagePage() {
-        newMessageButton.click();
+        Utils.clickWithJS(newMessageButton);
         return PageFactory.initElements(BrowserManager.browser, NewMessagePage.class);
     }
 

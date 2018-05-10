@@ -1,9 +1,10 @@
+package Pages;
+
+import Framework.BrowserManager;
+import Framework.Utils;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AccountPage extends BrowserManager {
 
@@ -30,23 +31,21 @@ public class AccountPage extends BrowserManager {
     }
 
     public StatementPage openStatementPage() {
-        Actions action = new Actions(browser);
-        action.moveToElement(accountsMenu).build().perform();
+        Utils.navigateToDropDownList(accountsMenu);
         Utils.waitForElementVisible(statement);
         statement.click();
         return PageFactory.initElements(BrowserManager.browser, StatementPage.class);
     }
 
     public ExchangePage openExchangePage() {
-        Actions action = new Actions(browser);
-        action.moveToElement(currencyMenu).build().perform();
+        Utils.navigateToDropDownList(currencyMenu);
         Utils.waitForElementVisible(currencyExchange);
         currencyExchange.click();
         return PageFactory.initElements(BrowserManager.browser, ExchangePage.class);
     }
 
     public MessagesPage openEmailsPage() {
-        email.click();
+        Utils.clickWithJS(email);
         return PageFactory.initElements(BrowserManager.browser, MessagesPage.class);
     }
 }

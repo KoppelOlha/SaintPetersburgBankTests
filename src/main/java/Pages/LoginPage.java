@@ -1,3 +1,7 @@
+package Pages;
+
+import Framework.BrowserManager;
+import Framework.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,7 +12,7 @@ public class LoginPage extends BrowserManager {
     WebElement loginButton;
 
     public ConfirmCodePage loginPasswordEnter() {
-        loginButton.click();
+        Utils.clickWithJS(loginButton);
         return PageFactory.initElements(BrowserManager.browser, ConfirmCodePage.class);
     }
 }

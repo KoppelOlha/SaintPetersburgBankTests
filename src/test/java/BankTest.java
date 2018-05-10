@@ -1,3 +1,5 @@
+import Framework.BrowserManager;
+import Framework.Navigation;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -7,13 +9,15 @@ public class BankTest {
 
     @BeforeTest
     public void browser() {
-        BrowserManager browserManager = new BrowserManager();
-        browserManager.openBrowser();
+        BrowserManager.openBrowser();
     }
 
     @Test
     public void enterAccount() {
-        String userNameText = Navigation.openLoginPage().loginPasswordEnter().confirmSmsCode().getUserNameText();
+        String userNameText = Navigation.openLoginPage()
+                .loginPasswordEnter()
+                .confirmSmsCode()
+                .getUserNameText();
         Assert.assertTrue(userNameText.contains("Королёва Ольга"), "The name of the account's owner should be present");
     }
 

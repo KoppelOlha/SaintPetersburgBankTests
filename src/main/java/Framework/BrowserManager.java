@@ -1,3 +1,5 @@
+package Framework;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -7,8 +9,8 @@ public class BrowserManager {
 
     public static WebDriver browser;
 
-    public void openBrowser() {
-        System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
+    public static void openBrowser() {
+        System.setProperty("webdriver.chrome.driver", "./target/classes/chromedriver.exe");
         browser = new ChromeDriver();
         browser.manage().window().maximize();
         browser.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
