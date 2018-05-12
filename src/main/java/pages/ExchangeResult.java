@@ -1,9 +1,7 @@
-package Pages;
+package pages;
 
-import Framework.BrowserManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ExchangeResult {
 
@@ -12,9 +10,5 @@ public class ExchangeResult {
 
     public String getSuccessText() {
         return isNotificationPresent.getText();
-    }
-
-    public ExchangeResult exchangeResultInit() {
-        return PageFactory.initElements(BrowserManager.browser, ExchangeResult.class);
     }
 }

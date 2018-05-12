@@ -1,12 +1,10 @@
-package Pages;
+package pages;
 
-import Framework.BrowserManager;
-import Framework.Utils;
+import framework.BrowserManager;
+import framework.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ExchangePage extends BrowserManager {
 
@@ -33,10 +31,10 @@ public class ExchangePage extends BrowserManager {
 
     public ExchangePreviewPage exchangeOrdering(String textSum, String someText) {
         Utils.clickWithJS(sellFromAccount);
-        new WebDriverWait(BrowserManager.browser, 3).until(ExpectedConditions.visibilityOf(sellCurrencyAccount)).click();
+        Utils.waitForElementVisible(sellCurrencyAccount);
         inputSum.sendKeys(textSum);
         Utils.clickWithJS(buyToAccount);
-        new WebDriverWait(BrowserManager.browser, 3).until(ExpectedConditions.visibilityOf(buyCurrencyAccount)).click();
+        Utils.waitForElementVisible(buyCurrencyAccount);
         inputDetails.sendKeys(someText);
         Utils.clickWithJS(calculateButton);
         return PageFactory.initElements(BrowserManager.browser, ExchangePreviewPage.class);

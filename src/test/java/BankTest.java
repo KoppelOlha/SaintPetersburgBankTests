@@ -1,6 +1,6 @@
-import Framework.BrowserManager;
-import Framework.CSVParser;
-import Framework.Navigation;
+import framework.BrowserManager;
+import framework.CSVParser;
+import framework.Navigation;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -68,7 +68,7 @@ public class BankTest {
 
 
     @Test(dataProvider = "csv")
-    public void messageSearch(String someMessage) throws InterruptedException {
+    public void messageSearch(String someMessage) {
         String sentMessageText1 = Navigation.openLoginPage()
                 .loginPasswordEnter()
                 .confirmSmsCode()

@@ -1,7 +1,7 @@
-package Framework;
+package framework;
 
-import Pages.LoginPage;
 import org.openqa.selenium.support.PageFactory;
+import pages.LoginPage;
 
 public class Navigation {
 
