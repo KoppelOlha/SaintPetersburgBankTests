@@ -1,6 +1,7 @@
 import framework.BrowserManager;
 import framework.CSVParser;
 import framework.Navigation;
+import framework.Utils;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,6 +20,7 @@ public class BankTest {
     @BeforeTest
     public void browser() {
         BrowserManager.openBrowser();
+        Utils.logInfo("The browser has been opened");
     }
 
     @Test
@@ -28,6 +30,7 @@ public class BankTest {
                 .confirmSmsCode()
                 .getUserNameText();
         Assert.assertTrue(userNameText.contains("Королёва Ольга"), "The name of the account's owner should be present");
+        Utils.logInfo("Enter account SUCCESS");
     }
 
     @Test
@@ -38,6 +41,7 @@ public class BankTest {
                 .openStatementPage()
                 .getClosingBalance();
         Assert.assertTrue(statementPage > 0, "The closing balanse should be positive");
+        Utils.logInfo("Closing balance is positive");
     }
 
 
@@ -51,6 +55,7 @@ public class BankTest {
                 .confirmExchange()
                 .getSuccessText();
         Assert.assertTrue(succesText.contains("Перевод выполнен!"), "The exchange should be successful");
+        Utils.logInfo("The exchange is successful");
     }
 
     @Test
@@ -63,6 +68,7 @@ public class BankTest {
                 .fillMessageForm("Can I ask you a question?")
                 .getSentMessageText();
         Assert.assertTrue(sentMessageText.contains("Can I ask you a question?"), "The sent message should be in the list of messages");
+        Utils.logInfo("The message has been received by the system");
 
     }
 
@@ -77,11 +83,13 @@ public class BankTest {
                 .fillMessageForm(someMessage)
                 .getSentMessageText();
         Assert.assertTrue(sentMessageText1.contains(someMessage), "The sent message should be in the list of messages");
+        Utils.logInfo("The messages is in the list");
     }
 
 
     @AfterTest
     public void closedBrowser() {
         BrowserManager.closedBrowser();
+        Utils.logInfo("The browser has been closed");
     }
 }

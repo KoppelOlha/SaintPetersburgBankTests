@@ -13,6 +13,7 @@ public class LoginPage extends BrowserManager {
 
     public ConfirmCodePage loginPasswordEnter() {
         Utils.clickWithJS(loginButton);
+        Utils.logInfo("Entered login and password");
         return PageFactory.initElements(BrowserManager.browser, ConfirmCodePage.class);
     }
 }

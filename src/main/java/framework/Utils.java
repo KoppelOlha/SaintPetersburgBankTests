@@ -1,5 +1,7 @@
 package framework;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,5 +21,11 @@ public class Utils {
 
     public static void clickWithJS(WebElement element) {
         ((JavascriptExecutor) BrowserManager.browser).executeScript("arguments[0].click();", element);
+    }
+
+    public static void logInfo(String someMessage) {
+        Logger logger = Logger.getLogger("BankTest");
+        PropertyConfigurator.configure("log4j.properties");
+        logger.info(someMessage);
     }
 }
