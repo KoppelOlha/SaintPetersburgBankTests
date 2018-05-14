@@ -2,12 +2,18 @@ import framework.BrowserManager;
 import framework.CSVParser;
 import framework.Navigation;
 import framework.Utils;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 
 public class BankTest {
@@ -17,7 +23,7 @@ public class BankTest {
         return CSVParser.loadMessageFromFile();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void browser() {
         BrowserManager.openBrowser();
         Utils.logInfo("The browser has been opened");
@@ -40,21 +46,21 @@ public class BankTest {
                 .confirmSmsCode()
                 .openStatementPage()
                 .getClosingBalance();
-        Assert.assertTrue(statementPage > 0, "The closing balanse should be positive");
+        Assert.assertTrue(statementPage > 0, "The closing balance should be positive");
         Utils.logInfo("Closing balance is positive");
     }
 
 
     @Test
     public void exchangeTransaction() {
-        String succesText = Navigation.openLoginPage()
+        String successText = Navigation.openLoginPage()
                 .loginPasswordEnter()
                 .confirmSmsCode()
                 .openExchangePage()
                 .exchangeOrdering("150", "Exchange")
                 .confirmExchange()
                 .getSuccessText();
-        Assert.assertTrue(succesText.contains("Перевод выполнен!"), "The exchange should be successful");
+        Assert.assertTrue(successText.contains("Перевод выполнен!"), "The exchange should be successful");
         Utils.logInfo("The exchange is successful");
     }
 
@@ -87,9 +93,20 @@ public class BankTest {
     }
 
 
-    @AfterTest
-    public void closedBrowser() {
+    @AfterMethod
+    public static void ScreenshotIfFailed(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            TakesScreenshot takesScreenshot = (TakesScreenshot) BrowserManager.browser;
+            File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(source, new File("./src/main/resources/Screenshots/FailedBankTest.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         BrowserManager.closedBrowser();
         Utils.logInfo("The browser has been closed");
     }
 }
+
+

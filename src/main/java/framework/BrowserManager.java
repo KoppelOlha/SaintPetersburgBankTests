@@ -16,7 +16,6 @@ public class BrowserManager {
         browser.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-
     public static void closedBrowser() {
         browser.quit();
     }
