@@ -89,7 +89,7 @@ public class BankTest {
                 .fillMessageForm(someMessage)
                 .getSentMessageText();
         Assert.assertTrue(sentMessageText1.contains(someMessage), "The sent message should be in the list of messages");
-        Utils.logInfo("The messages is in the list");
+        Utils.logInfo("The message is in the list");
     }
 
 
