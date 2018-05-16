@@ -12,8 +12,8 @@ public class LoginPage extends BrowserManager {
     WebElement loginButton;
 
     public ConfirmCodePage loginPasswordEnter() {
-        Utils.clickWithJS(loginButton);
         Utils.logInfo("Entered login and password");
+        Utils.clickWithJS(loginButton);
         return PageFactory.initElements(BrowserManager.browser, ConfirmCodePage.class);
     }
 }

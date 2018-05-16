@@ -2,9 +2,6 @@ import framework.BrowserManager;
 import framework.CSVParser;
 import framework.Navigation;
 import framework.Utils;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -12,8 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 
 public class BankTest {
@@ -94,18 +89,12 @@ public class BankTest {
 
 
     @AfterMethod
-    public static void ScreenshotIfFailed(ITestResult result) {
+    public void closeBrowser(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            TakesScreenshot takesScreenshot = (TakesScreenshot) BrowserManager.browser;
-            File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(source, new File("./src/main/resources/Screenshots/FailedBankTest.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Utils.screenshotIfFailed();
         }
-        BrowserManager.closedBrowser();
         Utils.logInfo("The browser has been closed");
+        BrowserManager.closedBrowser();
     }
 }
 
